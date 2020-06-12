@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import decorations from './decorations'
 import facilityStyle from './facility-style'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
@@ -43,6 +44,16 @@ class App extends FinderApp {
       filterChoiceOptions: filters,
       decorations: decorations,
       directionsUrl: 'https://maps.googleapis.com/maps/api/js?&sensor=false&libraries=visualization'
+    })
+    this.filterIcons()
+  }
+  filterIcons() {
+    const filter = this.filters.choiceControls[0]
+    const labels = filter.find('label')
+    filter.choices.forEach((ch, i) => {
+      let type = ch.values[0].replace(/(\s+&\s+|\s+)/g, '-').toLowerCase()
+      const iconDiv = $(`<div class="icon ${type}"></div>`)
+      $(labels[i]).prepend(iconDiv)
     })
   }
 }

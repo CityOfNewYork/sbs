@@ -8,6 +8,9 @@ const decorations = {
       <span class="srch-lbl-sm">${this.getAddress1()}</span>`
     )
   },
+  cssClass() {
+    return `${this.getType()}`.replace(/(\s+&\s+|\s+)/g, '-').toLowerCase()
+  },
   getAddress1() {
     return this.get('Street_Address_1')
   },
@@ -47,6 +50,11 @@ const decorations = {
     .append(`<div><strong>Details: </strong> ${details}</div>`)
 
     return div
-  }
+  },
+  nameHtml() {
+    return $('<h3 class="name notranslate"></h3>')
+      .append($(`<div class="icon ${this.cssClass()}"></div>`))
+      .append(this.getName())
+  },
 }
 export default decorations

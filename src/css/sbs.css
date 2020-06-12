@@ -1,0 +1,30 @@
+.icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 1px 3px 0 0;
+  float: left;
+}
+#filters .icon {
+  margin: 10px 5px 10px -5px;
+}
+.translated-rtl .name .icon {
+  float: right;
+  margin-left: 3px;
+}
+.translated-rtl #filters .icon {
+  margin: 10px -5px 10px 5px;
+  float: right;
+}
+.translated-rtl .pop>.content .name{
+  padding-right: initial;
+}
+.icon.business-center {
+  background-color: var(--business-center);
+}
+.icon.workforce1-center {
+  background-color: var(--workforce1-center);
+}
+.icon.industrial-transportation-services {
+  background-color: var(--industrial-transportation-services);
+}
