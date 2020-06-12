@@ -24,7 +24,7 @@ const decorations = {
     }[this.get('Boro')]
   }, 
   getCityStateZip() {
-    return `${this.get('City')}, NY`
+    return `${this.get('City')}, NY ${this.get('ZIP')}`
   },
   getName() {
     return this.get('Name')
