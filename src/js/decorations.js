@@ -9,7 +9,7 @@ const decorations = {
     )
   },
   cssClass() {
-    return `${this.getType()}`.replace(/(\s+&\s+|\s+)/g, '-').toLowerCase()
+    return `${this.getType()}`.replace(/[^A-Za-z0-9\s|^_]/g, '').replace(/\s+/g, '-').toLowerCase()
   },
   getAddress1() {
     return this.get('Street_Address_1')
@@ -53,7 +53,7 @@ const decorations = {
   },
   nameHtml() {
     return $('<h3 class="name notranslate"></h3>')
-      .append($(`<div class="icon ${this.cssClass()}"></div>`))
+      .append($(`<div class="ico ${this.cssClass()}"></div>`))
       .append(this.getName())
   },
 }

@@ -3,19 +3,9 @@ import decorations from '../src/js/decorations'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import App from '../src/js/App';
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
-import Filters from 'nyc-lib/nyc/ol/Filters'
 
 jest.mock('nyc-lib/nyc/ol/FinderApp')
 jest.mock('nyc-lib/nyc/ol/format/CsvPoint')
-
-const filterIcons = App.prototype.filterIcons
-beforeEach(() => {
-  App.prototype.filterIcons = jest.fn()
-
-})
-afterEach(() => {
-  App.prototype.filterIcons = filterIcons
-})
 
 describe('constructor', () => {
   test('constructor - data as csv', () => {
@@ -57,49 +47,5 @@ describe('constructor', () => {
     expect(FinderApp.mock.calls[0][0].filterChoiceOptions[0].choices[2].values).toEqual(['Industrial & Transportation Services'])
     expect(FinderApp.mock.calls[0][0].filterChoiceOptions[0].choices[2].label).toBe('Industrial & Transportation Services')
     expect(FinderApp.mock.calls[0][0].filterChoiceOptions[0].choices[2].checked).toBe(true)
-  })
-})
-describe('filterIcons', () => {
-  const target = $('<div></div>')
-  const filterOptions = {
-    target,
-    choiceOptions: [
-      {
-        title: 'Location Type',
-        radio: false,
-        choices: [
-          {name: 'FACILITY_TYPE', values: ['Business Center'], label: 'Business Center', checked: true},
-          {name: 'FACILITY_TYPE', values: ['Workforce1 Center'], label: 'Workforce1 Center', checked: true},
-          {name: 'FACILITY_TYPE', values: ['Industrial & Transportation Services'], label: 'Industrial & Transportation Services', checked: true},
-        ]
-      }
-    ]
-  }
-  beforeEach(() => {
-    $('body').append(target)
-  })
-  afterEach(() => {
-    target.remove()
-  })
-
-  test('filterIcons', () => {
-    expect.assertions(3)
-    
-    const app = new App()  
-
-    app.filterIcons = filterIcons
-    app.filters = new Filters(filterOptions)
-    
-    app.filterIcons()
-  
-    const filter = app.filters.choiceControls[0]
-    const labels = filter.find('label')
-
-    filter.choices.forEach((ch, i) => {
-      const img = $(labels[i]).children().first()
-      const type = ch.values[0].replace(/(\s+&\s+|\s+)/g, '-').toLowerCase()
-      expect(img.attr('class')).toBe(`icon ${type}`)
-    })
-  
   })
 })

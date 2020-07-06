@@ -7,9 +7,9 @@ import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 const filters = [{
   title: 'Location Type',
   choices: [
-    {name: 'FACILITY_TYPE', values: ['Business Center'], label: 'Business Center', checked: true},
-    {name: 'FACILITY_TYPE', values: ['Workforce1 Center'], label: 'Workforce1 Center', checked: true},
-    {name: 'FACILITY_TYPE', values: ['Industrial & Transportation Services'], label: 'Industrial & Transportation Services', checked: true},
+    {name: 'FACILITY_TYPE', values: ['Business Center'], label: 'Business Center', checked: true, icon: true},
+    {name: 'FACILITY_TYPE', values: ['Workforce1 Center'], label: 'Workforce1 Center', checked: true, icon: true},
+    {name: 'FACILITY_TYPE', values: ['Industrial & Transportation Services'], label: 'Industrial & Transportation Services', checked: true, icon: true},
   ]
   },
   {
@@ -44,16 +44,6 @@ class App extends FinderApp {
       filterChoiceOptions: filters,
       decorations: decorations,
       directionsUrl: 'https://maps.googleapis.com/maps/api/js?&sensor=false&libraries=visualization'
-    })
-    this.filterIcons()
-  }
-  filterIcons() {
-    const filter = this.filters.choiceControls[0]
-    const labels = filter.find('label')
-    filter.choices.forEach((ch, i) => {
-      let type = ch.values[0].replace(/(\s+&\s+|\s+)/g, '-').toLowerCase()
-      const iconDiv = $(`<div class="icon ${type}"></div>`)
-      $(labels[i]).prepend(iconDiv)
     })
   }
 }
