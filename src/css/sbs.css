@@ -37,3 +37,7 @@ html, body, body * {
 .btn * {
   color: var(--color-dark);
 }
+.tabs button.btn.active:focus, .tabs button.btn.active:focus * {
+  background-color: white;
+  color: var(--color-dark);
+}
