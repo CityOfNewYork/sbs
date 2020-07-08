@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 const decorations = {
   extendFeature() {
     this.set('FACILITY_TYPE', this.getType())
@@ -47,7 +49,10 @@ const decorations = {
     const div = $('<div class="detail"></div>')
     .append(`<div><strong>Type: </strong> ${type}</div>`)
     .append(`<div><strong>Hours: </strong> ${hours}</div>`)
-    .append(`<div><strong>Details: </strong> ${details}</div>`)
+    
+    if (details) {
+      div.append(`<div><strong>Details: </strong> ${details}</div>`)
+    }
 
     return div
   },
