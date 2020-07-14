@@ -25,9 +25,9 @@ test('constructor', () => {
 
 
   expect(CsvPoint).toHaveBeenCalledTimes(1)
-  expect(CsvPoint.mock.calls[0][0].x).toBe('X')
-  expect(CsvPoint.mock.calls[0][0].y).toBe('Y')    
-  expect(CsvPoint.mock.calls[0][0].dataProjection).toBe('EPSG:2263')
+  expect(CsvPoint.mock.calls[0][0].x).toBe('Longitude')
+  expect(CsvPoint.mock.calls[0][0].y).toBe('Latitude')    
+  expect(CsvPoint.mock.calls[0][0].dataProjection).toBe('EPSG:4326')
   
   expect(FinderApp.mock.calls[0][0].facilityTabTitle).toBe('Locations')
 

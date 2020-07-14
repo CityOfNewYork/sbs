@@ -37,9 +37,9 @@ class App extends FinderApp {
       facilityStyle: facilityStyle.pointStyle,
       facilitySearch: { displayField: 'search_label', nameField: 'Name'},
       facilityFormat: new CsvPoint({
-        x: 'X',
-        y: 'Y',
-        dataProjection: 'EPSG:2263'
+        x: 'Longitude',
+        y: 'Latitude',
+        dataProjection: 'EPSG:4326'
       }),
       filterChoiceOptions: filters,
       decorations: decorations,

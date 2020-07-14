@@ -16,21 +16,50 @@ beforeEach(() => {
     ZIP: 'ZIP',
     Details: 'Details',
     TypeID: '1',
-    X: 997267,
-    Y: 234834
+    Longitude: 40.861042,
+    Latitude: -73.891505,
+    X: 1014289.645833,
+    Y: 253102.03472200001
   })
   Object.assign(feature, decorations)
 })
 
 test('extendFeature', () => {
-  expect.assertions(3)
+  expect.assertions(7)
+  
   feature.extendFeature()
+
+  expect(feature.locationKey).toBe(`${feature.get('Longitude')}@${feature.get('Latitude')}`)
+
+
   expect(feature.get('FACILITY_TYPE')).toBe(feature.getType())
   expect(feature.get('BOROUGH')).toBe(feature.getBorough())
   expect(feature.get('search_label')).toBe(
     `<b><span class="srch-lbl-lg">${feature.getName()}</span></b><br>
       <span class="srch-lbl-sm">${feature.getAddress1()}</span>`
   )
+  
+  const feature2 = Object.assign(new Feature({Longitude: feature.get('Longitude'), Latitude: feature.get('Latitude')}), decorations)
+  
+  feature2.extendFeature()
+  expect(feature.locationKey).toEqual(feature2.locationKey)
+  expect(feature.countByLocation[feature.locationKey]).toBe(2) 
+  expect(feature2.countByLocation[feature.locationKey]).toBe(2) 
+
+  feature.countByLocation[feature.locationKey] = 0
+
+})
+
+test('getCountAtLocation', () => {
+  expect.assertions(2)
+  
+  feature.extendFeature()
+  expect(feature.getCountAtLocation()).toBe(1)
+
+  const feature2 = Object.assign(new Feature({Longitude: feature.get('Longitude'), Latitude: feature.get('Latitude')}), decorations)
+  feature2.extendFeature()
+  expect(feature.getCountAtLocation()).toBe(2)
+
 })
 
 

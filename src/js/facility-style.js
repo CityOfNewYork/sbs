@@ -6,6 +6,7 @@ import nycOl from 'nyc-lib/nyc/ol'
 import Circle from 'ol/style/Circle'
 import Fill from 'ol/style/Fill'
 import Stroke from 'ol/style/Stroke'
+import Text from 'ol/style/Text'
 
 const facilityStyle = {
   FACILITY_TYPE: {
@@ -13,6 +14,20 @@ const facilityStyle = {
     'Workforce1 Center': '#679EC3',
     'Industrial & Transportation Services': '#888888',
   },
+  textStyle: (size, count, style) => {
+    const fontSize = count > 9 ? 15 : 20
+    style.push(
+      new Style({
+        text: new Text({
+          fill: new Fill({color: '#fff'}),
+          font: `${fontSize}px sans-serif`,
+          text: `${count}`,
+          textAlign: 'center',
+          scale: size / 10
+        })
+      })
+    )
+},
   pointStyle: (feature, resolution) => {
     const zoom = nycOl.TILE_GRID.getZForResolution(resolution)
     const radius = facilityStyle.calcRadius(zoom)
@@ -24,6 +39,10 @@ const facilityStyle = {
         radius: radius * 1.1
       })
     })]
+    const count = feature.getCountAtLocation()
+    if (count > 1) {
+      facilityStyle.textStyle(radius,count,style)
+    }
     return style
   },
   calcRadius: (zoom) => {

@@ -1,7 +1,12 @@
 import $ from 'jquery'
 
 const decorations = {
+  countByLocation: {},
   extendFeature() {
+    const locationKey = `${this.get('Longitude')}@${this.get('Latitude')}`
+    const count = decorations.countByLocation[locationKey] || 0
+    decorations.countByLocation[locationKey] = count + 1
+    this.locationKey = locationKey
     this.set('FACILITY_TYPE', this.getType())
     this.set('BOROUGH', this.getBorough())
     this.set(
@@ -9,6 +14,9 @@ const decorations = {
       `<b><span class="srch-lbl-lg">${this.getName()}</span></b><br>
       <span class="srch-lbl-sm">${this.getAddress1()}</span>`
     )
+  },
+  getCountAtLocation() {
+    return decorations.countByLocation[this.locationKey]
   },
   cssClass() {
     return `${this.getType()}`.replace(/[^A-Za-z0-9\s|^_]/g, '').replace(/\s+/g, '-').toLowerCase()
