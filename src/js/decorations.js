@@ -7,6 +7,7 @@ const decorations = {
     const count = decorations.countByLocation[locationKey] || 0
     decorations.countByLocation[locationKey] = count + 1
     this.locationKey = locationKey
+    this.countIdx = decorations.countByLocation[locationKey] - 1
     this.set('FACILITY_TYPE', this.getType())
     this.set('BOROUGH', this.getBorough())
     this.set(

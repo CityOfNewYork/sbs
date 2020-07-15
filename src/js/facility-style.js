@@ -1,57 +1,55 @@
 /**
  * @module sbs/facility-style
  */
-import Style from 'ol/style/Style'
 import nycOl from 'nyc-lib/nyc/ol' 
-import Circle from 'ol/style/Circle'
+import Style from 'ol/style/Style'
+import Icon from 'ol/style/Icon'
 import Fill from 'ol/style/Fill'
-import Stroke from 'ol/style/Stroke'
 import Text from 'ol/style/Text'
 
 const facilityStyle = {
   FACILITY_TYPE: {
-    'Business Center': '#4DA64D',
-    'Workforce1 Center': '#679EC3',
-    'Industrial & Transportation Services': '#888888',
+    'Business Center': 'img/biz.svg',
+    'Workforce1 Center': 'img/wf1.svg',
+    'Industrial & Transportation Services': 'img/ind.svg',
   },
-  textStyle: (size, count, style) => {
-    const fontSize = count > 9 ? 15 : 20
-    style.push(
-      new Style({
-        text: new Text({
-          fill: new Fill({color: '#fff'}),
-          font: `${fontSize}px sans-serif`,
-          text: `${count}`,
-          textAlign: 'center',
-          scale: size / 10
-        })
-      })
-    )
-},
+  textStyle: (count, scale) => {
+    const offset = -(count - 1) * scale * 0.1 * 32
+    return new Style({
+      text: new Text({
+        fill: new Fill({color: '#fff'}),
+        font: 'bold 16px sans-serif',
+        text: `${count}`,
+        textAlign: 'center',
+        scale,
+        offsetX: offset,
+        offsetY:offset
+      }), 
+      zIndex: 100
+    })
+  },
   pointStyle: (feature, resolution) => {
-    const zoom = nycOl.TILE_GRID.getZForResolution(resolution)
-    const radius = facilityStyle.calcRadius(zoom)
+    const scale = nycOl.TILE_GRID.getZForResolution(resolution) / 18
     const type = feature.getType()
-    const style = [new Style({
-      image: new Circle({
-        fill: new Fill({color: facilityStyle.FACILITY_TYPE[type]}),
-        stroke: new Stroke({color: '#fff', width: 1}),
-        radius: radius * 1.1
-      })
-    })]
     const count = feature.getCountAtLocation()
-    if (count > 1) {
-      facilityStyle.textStyle(radius,count,style)
+    const countIdx = feature.countIdx
+    const anchor = 0.5 + (countIdx * 0.1)
+    const style = [
+      new Style({
+        image: new Icon({
+          src: facilityStyle.FACILITY_TYPE[type],
+          imageSize: [32, 32],
+          scale,
+          anchor: [anchor, anchor],
+          opacity: .7
+        }),
+        zIndex: countIdx
+      })
+    ]
+    if (count > 1 && countIdx === count - 1) {
+      style.push(facilityStyle.textStyle(count, scale))
     }
     return style
-  },
-  calcRadius: (zoom) => {
-    let radius = 6
-    if (zoom > 17) radius = 20
-    else if (zoom > 15) radius = 16
-    else if (zoom > 13) radius = 12
-    else if (zoom > 11) radius = 8
-    return radius
   }
 }
 export default facilityStyle
