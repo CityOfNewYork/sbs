@@ -7,6 +7,10 @@ import Icon from 'ol/style/Icon'
 import Fill from 'ol/style/Fill'
 import Text from 'ol/style/Text'
 
+const ANCHOR = ANCHOR
+const ANCHOR_OFFSET = 0.1
+const ICON_WIDTH = 32
+
 const facilityStyle = {
   FACILITY_TYPE: {
     'Business Center': 'img/biz.svg',
@@ -14,7 +18,7 @@ const facilityStyle = {
     'Industrial & Transportation Services': 'img/ind.svg',
   },
   textStyle: (count, scale) => {
-    const offset = -(count - 1) * scale * 0.1 * 32
+    const offset = -(count - 1) * scale * ANCHOR_OFFSET * ICON_WIDTH
     return new Style({
       text: new Text({
         fill: new Fill({color: '#fff'}),
@@ -33,12 +37,12 @@ const facilityStyle = {
     const type = feature.getType()
     const count = feature.getCountAtLocation()
     const countIdx = feature.countIdx
-    const anchor = 0.5 + (countIdx * 0.1)
+    const anchor = ANCHOR + (countIdx * ANCHOR_OFFSET)
     const style = [
       new Style({
         image: new Icon({
           src: facilityStyle.FACILITY_TYPE[type],
-          imageSize: [32, 32],
+          imageSize: [ICON_WIDTH, ICON_WIDTH],
           scale,
           anchor: [anchor, anchor],
           opacity: .7
