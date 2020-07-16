@@ -25,12 +25,12 @@ beforeEach(() => {
 })
 
 test('extendFeature', () => {
-  expect.assertions(7)
+  expect.assertions(9)
   
   feature.extendFeature()
 
   expect(feature.locationKey).toBe(`${feature.get('Longitude')}@${feature.get('Latitude')}`)
-
+  expect(feature.countIdx).toBe(0)
 
   expect(feature.get('FACILITY_TYPE')).toBe(feature.getType())
   expect(feature.get('BOROUGH')).toBe(feature.getBorough())
@@ -45,6 +45,7 @@ test('extendFeature', () => {
   expect(feature.locationKey).toEqual(feature2.locationKey)
   expect(feature.countByLocation[feature.locationKey]).toBe(2) 
   expect(feature2.countByLocation[feature.locationKey]).toBe(2) 
+  expect(feature2.countIdx).toBe(1)
 
   feature.countByLocation[feature.locationKey] = 0
 
