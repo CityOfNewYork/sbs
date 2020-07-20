@@ -18,7 +18,7 @@ test('constructor', () => {
   expect(FinderApp.mock.calls[0][0].title).toBe('Small Business Services Finder')
   expect(FinderApp.mock.calls[0][0].splashOptions.message).toBe('Splash Message')
   expect(FinderApp.mock.calls[0][0].splashOptions.buttonText).toEqual(['Screen reader instructions', 'View map to find closest location'])
-  expect(FinderApp.mock.calls[0][0].facilityUrl).toBe('../src/data/center.csv')
+  expect(FinderApp.mock.calls[0][0].facilityUrl).toBe('data/center.csv')
   expect(FinderApp.mock.calls[0][0].facilityStyle).toBe(facilityStyle.pointStyle)
   expect(FinderApp.mock.calls[0][0].facilitySearch.displayField).toBe('search_label')
   expect(FinderApp.mock.calls[0][0].facilitySearch.nameField).toBe('Name')

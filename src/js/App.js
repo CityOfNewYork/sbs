@@ -33,7 +33,7 @@ class App extends FinderApp {
         buttonText: ['Screen reader instructions', 'View map to find closest location']
       },
       geoclientUrl: 'https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example',
-      facilityUrl: '../src/data/center.csv',
+      facilityUrl: 'data/center.csv',
       facilityStyle: facilityStyle.pointStyle,
       facilitySearch: { displayField: 'search_label', nameField: 'Name'},
       facilityFormat: new CsvPoint({
