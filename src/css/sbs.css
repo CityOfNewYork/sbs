@@ -37,6 +37,10 @@ html, body, body * {
 .btn * {
   color: var(--color-dark);
 }
+.btn-sq:hover, .btn-rnd:hover {
+  background-color: #4294CD;
+  color: var(--color-light);
+}
 .tabs button.btn.active:focus, .tabs button.btn.active:focus * {
   background-color: white;
   color: var(--color-dark);
