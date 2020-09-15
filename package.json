@@ -1,6 +1,6 @@
 {
   "name": "sbs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Small Business Services Finder",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "jquery": "^3.3.1",
     "nyc-lib": "^1.4.9",
     "ol": "6.1.0",
-    "papaparse": "^5.2.0",
+    "papaparse": "^5.3.0",
     "proj4": "^2.4.4"
   },
   "devDependencies": {
