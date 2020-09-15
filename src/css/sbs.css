@@ -1,12 +1,16 @@
 .facility .ico, #filters .ico {
   float: left;
+  border-radius: 50%;
+}
+.facility .ico {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
   margin-right: 3px;
 }
 #filters .ico {
-  margin: 8px 5px 10px -5px;
+  margin: 8px 3px 10px 3px;
+  width: 12px;
+  height: 12px;
 }
 .translated-rtl .dtl ul {
   margin: 5px;
@@ -16,7 +20,7 @@
   margin-left: 3px;
 }
 .translated-rtl #filters .ico {
-  margin: 8px -5px 10px 5px;
+  margin: 8px 5px 10px 5px;
   float: right;
 }
 .translated-rtl .pop>.content .name {
@@ -44,4 +48,8 @@ html, body, body * {
 .tabs button.btn.active:focus, .tabs button.btn.active:focus * {
   background-color: white;
   color: var(--color-dark);
+}
+.fnd .splash a.btn.rad-all.btn-yes {
+  width: 245px !important;
+  padding-left: 35px;
 }
