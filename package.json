@@ -1,6 +1,6 @@
 {
   "name": "sbs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Small Business Services Finder",
   "main": "index.js",
   "scripts": {
